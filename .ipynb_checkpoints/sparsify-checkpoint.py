@@ -39,7 +39,7 @@ def ISTA_PN(I,basis,lambd,num_iter,eta=None, useMAGMA=True):
     M = basis.size(1)
     if eta is None:
         if useMAGMA:
-            L = torch.max(torch.symeig(torch.mm(basis,basis.t()),eigenvectors=False)[0])
+            L = torch.max(torch.linalg.eigvalsh(torch.mm(basis,basis.t()), UPLO='U')[0])
             eta = 1./L
         else:
             eta = 1./cp.linalg.eigvalsh(cp.asarray(torch.mm(basis,basis.t()).cpu().numpy())).max().get().reshape(1)
@@ -66,7 +66,7 @@ def FISTA(I,basis,lambd,num_iter,eta=None, useMAGMA=True):
     M = basis.size(1)
     if eta is None:
         if useMAGMA:
-            L = torch.max(torch.symeig(torch.mm(basis,basis.t()),eigenvectors=False)[0])
+            L = torch.max(torch.linalg.eigvalsh(torch.mm(basis,basis.t()), UPLA='U')[0])
             eta = 1./L
         else:
             eta = 1./cp.linalg.eigvalsh(cp.asarray(torch.mm(basis,basis.t()).cpu().numpy())).max().get().reshape(1)
@@ -96,7 +96,7 @@ def ISTA(I,basis,lambd,num_iter,eta=None, useMAGMA=True):
     M = basis.size(1)
     if eta is None:
         if useMAGMA:
-            L = torch.max(torch.symeig(torch.mm(basis,basis.t()),eigenvectors=False)[0])
+            L = torch.max(torch.linalg.eigvalsh(torch.mm(basis,basis.t()),UPLA='U')[0])
             eta = 1./L
         else:
             eta = 1./cp.linalg.eigvalsh(cp.asarray(torch.mm(basis,basis.t()).cpu().numpy())).max().get().reshape(1)
