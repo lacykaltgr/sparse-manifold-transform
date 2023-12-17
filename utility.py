@@ -8,6 +8,7 @@ import time
 from mpl_toolkits.mplot3d import Axes3D
 import numpy.linalg as la
 from numpy import random
+import cv2
 
 
 def imshow(im,ax=None,nonBlock=False, title=None, vmin=None, vmax=None):
@@ -247,5 +248,38 @@ def patch_translation(patch,xshift,yshift):
     locy_new = np.clip(yshift,0,np.Infinity).astype('int')
     patch_new[locx_new:xdim+xshift,locy_new:ydim+yshift] = patch[locx:xdim-xshift,locy:ydim-yshift]
     return patch_new
+
+
+def load_video(file_path, n_frames):
+    cap = cv2.VideoCapture(file_path)
+
+    # Check if the video file was successfully opened
+    if not cap.isOpened():
+        print("Error: Could not open video file.")
+        return None
+
+    # Read the frames of the video
+    frames = []
+    for i in range(n_frames):
+        ret, frame = cap.read()
+        # Break the loop if we have reached the end of the video
+        if not ret:
+            break
+
+        # Convert the frame to grayscale or perform any other preprocessing
+        # For example, you can use cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) for grayscale
+        # or apply other image processing techniques
+        gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        # Append the frame to the list
+        frames.append(gray_frame)
+
+    # Release the video capture object
+    cap.release()
+
+    # Convert the list of frames to a NumPy array
+    frames_array = np.array(frames)
+
+    return frames_array
 
 
