@@ -21,3 +21,10 @@ def plot_P():
     Plot the projection matrix P.
     """
     pass
+
+def project(P, A):
+    """
+    Project the data.
+    """
+    Beta = P @ A
+    return Beta

@@ -2,11 +2,8 @@
 """
 This file contains multiple method to sparsify the coefficients
 """
-import time
 import numpy as np
-import numpy.linalg as la
 import torch
-import torch.nn.functional as F
 
 
 
@@ -29,7 +26,7 @@ def ISTA_PN(I,basis,lambd,num_iter,eta=None):
         ahat.abs_()
         ahat.sub_(eta * lambd).clamp_(min = 0.)
         ahat.mul_(ahat_sign)
-        Res = I - torch.mm(basis,ahat)
+        Res = I - torch.mm(basis, ahat)
     return ahat, Res
 
 

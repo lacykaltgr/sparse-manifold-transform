@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+
 def downsample(data, algorithm="gaussian_pyramid", factor=2):
 
     if algorithm == 'steerable_pyramid':
