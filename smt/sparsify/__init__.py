@@ -1,9 +1,9 @@
 import torch
 import numpy as np
 
-from smt.sparsify.solvers import *
-from smt.sparsify.utils import *
-from smt.sparsify.dictionary_update import *
+from ..sparsify.solvers import *
+from ..sparsify.utils import *
+from ..sparsify.dictionary_update import *
 
 def learn_dictionary(data, n_dims=16, dictionary_size=2048, batch_size=128, steps=3_000_000, lambd=1.0):
     """

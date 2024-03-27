@@ -10,7 +10,7 @@ import numpy.linalg as la
 from numpy import random
 import cv2
 import matplotlib.animation as animation
-import pyrtools as pt
+#import pyrtools as pt
 
 def imshow(im,ax=None,nonBlock=False, title=None, vmin=None, vmax=None):
     axflag = True
